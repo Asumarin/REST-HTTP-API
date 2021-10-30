@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Put, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 import { CreateCatDto } from './dto/create-cat';
 
@@ -6,7 +6,26 @@ import { CreateCatDto } from './dto/create-cat';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Post('create')
+  //CRUD - create (POST), read(GET), update(PUT), delete(DEL)
+
+  @Delete('')
+  deleteCat(@Query('id') id: string) {
+    return this.appService.deleteCat(id);
+  }
+
+  @Put('')
+  updateCat(@Body() dto,
+  @Query('id') id: string,
+  ) {
+    return this.appService.findCatByName({...dto, id});
+  }
+
+  @Get('')
+  getCat() {
+    return this.appService.getCat();
+  }
+
+  @Post('')
   getHello(@Body() dto: CreateCatDto) {
     return this.appService.createCat(dto);
   }
